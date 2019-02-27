@@ -50,3 +50,24 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# commonly used editors
+# vim
+*.swp
+tags
+.ycm_extra_conf.py
+.ycm_extra_conf.pyc
+__pycache__/
+
+# OS X
+.DS_Store
+._.DS_Store
+
+# generated files etc
+*.[oa]
+*.l[oa]
+*.so
+*.dll
+*.d
+*.d.*
