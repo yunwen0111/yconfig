@@ -71,3 +71,5 @@ __pycache__/
 *.dll
 *.d
 *.d.*
+
+/test
