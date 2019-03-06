@@ -376,3 +376,20 @@ extern "C" const char *yconfig_query_string(yconfig_t *yc, const char *sname, co
 
     return NULL;
 }
+
+
+
+extern "C" int yconfig_set_int(yconfig_t *yc, const char *sname, const char *name, int val)
+{
+    int *data = (int *)malloc(sizeof(int));
+    *data = val;
+    return line_insert(yc, sname, YCONFIG_VALUE_TYPE_INT, name, data);
+}
+
+
+
+extern "C" int yconfig_set_string(yconfig_t *yc, const char *sname, const char *name, const char *val)
+{
+    char *data = strdup(val);
+    return line_insert(yc, sname, YCONFIG_VALUE_TYPE_STRING, name, data);
+}
