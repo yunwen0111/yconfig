@@ -326,7 +326,29 @@ extern "C" int yconfig_parse(yconfig_t *yc, const char *filename)
 
 extern "C" int yconfig_file(yconfig_t *yc, const char *filename)
 {
-    return 1;
+    FILE *fp = fopen(filename, "wb");
+    if (!fp)
+        return 1;
+
+    if (yc) {
+        for (map<string, map<string, yconfig_val_t> >::const_iterator it
+                = yc->vals.begin(); it != yc->vals.end(); ++it) {
+            fprintf(fp, "[%s]\n", it->first.c_str());
+            for (map<string, yconfig_val_t>::const_iterator it2
+                    = it->second.begin(); it2 != it->second.end(); ++it2) {
+                if (it2->second.type == YCONFIG_VALUE_TYPE_STRING)
+                        fprintf(fp, "%s = \"%s\"\n", it2->first.c_str(),
+                                (const char *)it2->second.val);
+                else if (it2->second.type == YCONFIG_VALUE_TYPE_INT)
+                        fprintf(fp, "%s = %d\n", it2->first.c_str(),
+                                *(const int *)it2->second.val);
+            }
+        }
+    }
+
+    fclose(fp);
+
+    return 0;
 }
 
 
