@@ -195,8 +195,8 @@ static void *line_strip_value(const char **l, const char **r, yconfig_value_type
         int *val = (int *)malloc(sizeof(int));
         char *s = (char *)calloc(1, *r - *l + 1);
         memcpy(s, *l, *r - *l);
-        free(s);
         *val = atoi(s);
+        free(s);
         ret = val;
     }
 
